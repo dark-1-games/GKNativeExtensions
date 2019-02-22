@@ -5,15 +5,14 @@
 //  Created by Kristijan Trajkovski on 2/22/19.
 //  Copyright © 2019 Kristijan Trajkovski. All rights reserved.
 //
+#import <Foundation/Foundation.h>
 
-#import <Cocoa/Cocoa.h>
+#ifndef GKNativeExtensions_h
+#define GKNativeExtensions_h
 
-//! Project version number for GKNativeExtensions.
-FOUNDATION_EXPORT double GKNativeExtensionsVersionNumber;
+extern "C" {
+    typedef void (*byteArrayPtrCallbackFunc)(NSData * _Nullable);
+    typedef void (*boolCallbackFunc)(const bool);
+}
 
-//! Project version string for GKNativeExtensions.
-FOUNDATION_EXPORT const unsigned char GKNativeExtensionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <GKNativeExtensions/PublicHeader.h>
-
-
+#endif /* GKNativeExtensions_h */
