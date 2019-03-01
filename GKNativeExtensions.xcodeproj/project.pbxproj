@@ -7,29 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8AE9B14822203EE3004A8553 /* GKNativeExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */; };
-		8AE9B14922203EED004A8553 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE9B11222202FD6004A8553 /* GameKit.framework */; };
-		8AE9B14A22203EF2004A8553 /* GKNativeExtensions.h in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B0F822202F06004A8553 /* GKNativeExtensions.h */; };
+		8A073AD9222943E6005ABD6B /* GKNativeExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */; };
+		8AFA79BC22245A8500084846 /* GKNativeExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */; };
+		8AFA79BD2225498B00084846 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE9B11222202FD6004A8553 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8A073ACE2229427C005ABD6B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		8AE9B0F822202F06004A8553 /* GKNativeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKNativeExtensions.h; sourceTree = "<group>"; };
+		8A073AD02229427C005ABD6B /* libGKNativeExtensions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGKNativeExtensions.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AD580AC22244A92000E2F37 /* GKNativeExtensionsMac.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GKNativeExtensionsMac.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AE9B0F822202F06004A8553 /* GKNativeExtensions.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = GKNativeExtensions.h; sourceTree = "<group>"; };
 		8AE9B0F922202F06004A8553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AE9B10322202F06004A8553 /* GKNativeExtensionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GKNativeExtensionsTests.m; sourceTree = "<group>"; };
-		8AE9B10522202F06004A8553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GKNativeExtensions.mm; sourceTree = "<group>"; };
 		8AE9B11222202FD6004A8553 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		8AE9B12A222032EF004A8553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AE9B14222203EB9004A8553 /* GKNativeExtensions.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GKNativeExtensions.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AE9B14422203EB9004A8553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8AE9B13F22203EB9004A8553 /* Frameworks */ = {
+		8A073ACD2229427C005ABD6B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AE9B14922203EED004A8553 /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AD580A922244A92000E2F37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AFA79BD2225498B00084846 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,9 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				8AE9B0F722202F06004A8553 /* GKNativeExtensions */,
-				8AE9B10222202F06004A8553 /* GKNativeExtensionsTests */,
-				8AE9B129222032EF004A8553 /* GKNativeExtensions */,
-				8AE9B14322203EB9004A8553 /* GKNativeExtensions */,
 				8AE9B0F622202F06004A8553 /* Products */,
 				8AE9B11122202FD5004A8553 /* Frameworks */,
 			);
@@ -51,7 +64,8 @@
 		8AE9B0F622202F06004A8553 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8AE9B14222203EB9004A8553 /* GKNativeExtensions.bundle */,
+				8AD580AC22244A92000E2F37 /* GKNativeExtensionsMac.bundle */,
+				8A073AD02229427C005ABD6B /* libGKNativeExtensions.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,15 +80,6 @@
 			path = GKNativeExtensions;
 			sourceTree = "<group>";
 		};
-		8AE9B10222202F06004A8553 /* GKNativeExtensionsTests */ = {
-			isa = PBXGroup;
-			children = (
-				8AE9B10322202F06004A8553 /* GKNativeExtensionsTests.m */,
-				8AE9B10522202F06004A8553 /* Info.plist */,
-			);
-			path = GKNativeExtensionsTests;
-			sourceTree = "<group>";
-		};
 		8AE9B11122202FD5004A8553 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,32 +88,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8AE9B129222032EF004A8553 /* GKNativeExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				8AE9B12A222032EF004A8553 /* Info.plist */,
-			);
-			path = GKNativeExtensions;
-			sourceTree = "<group>";
-		};
-		8AE9B14322203EB9004A8553 /* GKNativeExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				8AE9B14422203EB9004A8553 /* Info.plist */,
-			);
-			path = GKNativeExtensions;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8AE9B14122203EB9004A8553 /* GKNativeExtensions */ = {
+		8A073ACF2229427C005ABD6B /* GKNativeExtensions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8AE9B14522203EB9004A8553 /* Build configuration list for PBXNativeTarget "GKNativeExtensions" */;
+			buildConfigurationList = 8A073AD62229427C005ABD6B /* Build configuration list for PBXNativeTarget "GKNativeExtensions" */;
 			buildPhases = (
-				8AE9B13E22203EB9004A8553 /* Sources */,
-				8AE9B13F22203EB9004A8553 /* Frameworks */,
-				8AE9B14022203EB9004A8553 /* Resources */,
+				8A073ACC2229427C005ABD6B /* Sources */,
+				8A073ACD2229427C005ABD6B /* Frameworks */,
+				8A073ACE2229427C005ABD6B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -116,7 +105,24 @@
 			);
 			name = GKNativeExtensions;
 			productName = GKNativeExtensions;
-			productReference = 8AE9B14222203EB9004A8553 /* GKNativeExtensions.bundle */;
+			productReference = 8A073AD02229427C005ABD6B /* libGKNativeExtensions.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		8AD580AB22244A92000E2F37 /* GKNativeExtensionsMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AD580AF22244A92000E2F37 /* Build configuration list for PBXNativeTarget "GKNativeExtensionsMac" */;
+			buildPhases = (
+				8AD580A822244A92000E2F37 /* Sources */,
+				8AD580A922244A92000E2F37 /* Frameworks */,
+				8AD580AA22244A92000E2F37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GKNativeExtensionsMac;
+			productName = GKNativeExtensions_OSX;
+			productReference = 8AD580AC22244A92000E2F37 /* GKNativeExtensionsMac.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -128,7 +134,10 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Kristijan Trajkovski";
 				TargetAttributes = {
-					8AE9B14122203EB9004A8553 = {
+					8A073ACF2229427C005ABD6B = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					8AD580AB22244A92000E2F37 = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -145,13 +154,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8AE9B14122203EB9004A8553 /* GKNativeExtensions */,
+				8AD580AB22244A92000E2F37 /* GKNativeExtensionsMac */,
+				8A073ACF2229427C005ABD6B /* GKNativeExtensions */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8AE9B14022203EB9004A8553 /* Resources */ = {
+		8AD580AA22244A92000E2F37 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -161,18 +171,97 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8AE9B13E22203EB9004A8553 /* Sources */ = {
+		8A073ACC2229427C005ABD6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AE9B14A22203EF2004A8553 /* GKNativeExtensions.h in Sources */,
-				8AE9B14822203EE3004A8553 /* GKNativeExtensions.mm in Sources */,
+				8A073AD9222943E6005ABD6B /* GKNativeExtensions.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AD580A822244A92000E2F37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AFA79BC22245A8500084846 /* GKNativeExtensions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		8A073AD72229427C005ABD6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GC5X6V8MBJ;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A073AD82229427C005ABD6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GC5X6V8MBJ;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8AD580B022244A92000E2F37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = GC5X6V8MBJ;
+				INFOPLIST_FILE = GKNativeExtensions/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACH_O_TYPE = mh_bundle;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dark1.GKNativeExtensions-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		8AD580B122244A92000E2F37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = GC5X6V8MBJ;
+				INFOPLIST_FILE = GKNativeExtensions/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACH_O_TYPE = mh_bundle;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dark1.GKNativeExtensions-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		8AE9B10722202F06004A8553 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -225,11 +314,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphonesimulator  iphoneos appletvsimulator appletvos";
+				VALID_ARCHS = "i386 x86_64 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -281,62 +374,46 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphonesimulator  iphoneos appletvsimulator appletvos";
+				VALID_ARCHS = "i386 x86_64 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8AE9B14622203EB9004A8553 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = GC5X6V8MBJ;
-				INFOPLIST_FILE = GKNativeExtensions/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dark1.GKNativeExtensions;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		8AE9B14722203EB9004A8553 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = GC5X6V8MBJ;
-				INFOPLIST_FILE = GKNativeExtensions/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dark1.GKNativeExtensions;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A073AD62229427C005ABD6B /* Build configuration list for PBXNativeTarget "GKNativeExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A073AD72229427C005ABD6B /* Debug */,
+				8A073AD82229427C005ABD6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AD580AF22244A92000E2F37 /* Build configuration list for PBXNativeTarget "GKNativeExtensionsMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AD580B022244A92000E2F37 /* Debug */,
+				8AD580B122244A92000E2F37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8AE9B0EF22202F06004A8553 /* Build configuration list for PBXProject "GKNativeExtensions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8AE9B10722202F06004A8553 /* Debug */,
 				8AE9B10822202F06004A8553 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8AE9B14522203EB9004A8553 /* Build configuration list for PBXNativeTarget "GKNativeExtensions" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8AE9B14622203EB9004A8553 /* Debug */,
-				8AE9B14722203EB9004A8553 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,12 +7,18 @@
 //
 #import <Foundation/Foundation.h>
 
-#ifndef GKNativeExtensions_h
-#define GKNativeExtensions_h
-
+#ifdef __cplusplus
 extern "C" {
-    typedef void (*byteArrayPtrCallbackFunc)(NSData * _Nullable);
+#endif
+    struct SavedGameData {
+        const char* deviceName;
+        const char* name;
+        const double modificationDate;
+    };
+    
+    typedef void (*byteArrayPtrCallbackFunc)(char * _Nullable, int length);
     typedef void (*boolCallbackFunc)(const bool);
+    typedef void (*saveGameArrayPtrCallbackFunc)(const SavedGameData ** savedGameDataArray);
+#ifdef __cplusplus
 }
-
-#endif /* GKNativeExtensions_h */
+#endif
