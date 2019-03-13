@@ -10,15 +10,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    struct SavedGameData {
-        const char* deviceName;
-        const char* name;
-        const double modificationDate;
-    };
+    typedef struct SavedGameData {
+        const char* _Nullable deviceName;
+        const char* _Nullable name;
+        double modificationDate;
+    } SavedGameData;
     
     typedef void (*byteArrayPtrCallbackFunc)(char * _Nullable, int length);
     typedef void (*boolCallbackFunc)(const bool);
-    typedef void (*saveGameArrayPtrCallbackFunc)(const SavedGameData ** savedGameDataArray);
+    typedef void (*saveGamesCallbackFunc)(SavedGameData * _Nullable games, unsigned long length);
 #ifdef __cplusplus
 }
 #endif
