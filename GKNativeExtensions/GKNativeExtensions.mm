@@ -7,10 +7,6 @@
 #import <GameKit/GameKit.h>
 
 extern "C" {
-    void _TestCall() {
-        
-    }
-    
     void _GKDeleteGame(boolCallbackFunc callback, char* saveName){
         NSString* saveNameStr = [NSString stringWithUTF8String:saveName];
         NSLog(@"Deleting  = %@", saveNameStr);
