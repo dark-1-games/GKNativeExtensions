@@ -9,3 +9,6 @@ The GKNativeExtensions.cs file contains all the interfaces you can use for your 
 
 
 Keep in mind that the native code may return at odd times during execution, so it is a good idea to have a piece of code to wait for the next Update() call to make sure all unity data structures are available, something like [this](https://gist.github.com/Fireforge/3c7003794dcd804e135cac3822f78416) does the job nicely.
+
+
+Another important thing to note is - this requires the use of the iCloud entitlements in your app, and requires an iCloud container. Set it up in the capabilities section of your XCode project.
