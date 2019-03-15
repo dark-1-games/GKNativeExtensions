@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A073AD9222943E6005ABD6B /* GKNativeExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */; };
+		8AD6F579223960BB00D011C8 /* GKNativePlayerListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6F578223960BB00D011C8 /* GKNativePlayerListener.mm */; };
+		8AD6F57A223960BB00D011C8 /* GKNativePlayerListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6F578223960BB00D011C8 /* GKNativePlayerListener.mm */; };
 		8AFA79BC22245A8500084846 /* GKNativeExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */; };
 		8AFA79BD2225498B00084846 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE9B11222202FD6004A8553 /* GameKit.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +29,9 @@
 /* Begin PBXFileReference section */
 		8A073AD02229427C005ABD6B /* libGKNativeExtensions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGKNativeExtensions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD580AC22244A92000E2F37 /* GKNativeExtensionsMac.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GKNativeExtensionsMac.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AD6F577223960BB00D011C8 /* GKNativePlayerListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GKNativePlayerListener.h; sourceTree = "<group>"; };
+		8AD6F578223960BB00D011C8 /* GKNativePlayerListener.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GKNativePlayerListener.mm; sourceTree = "<group>"; };
+		8AD6F57B223963FE00D011C8 /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
 		8AE9B0F822202F06004A8553 /* GKNativeExtensions.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = GKNativeExtensions.h; sourceTree = "<group>"; };
 		8AE9B0F922202F06004A8553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GKNativeExtensions.mm; sourceTree = "<group>"; };
@@ -76,6 +81,9 @@
 				8AE9B0F822202F06004A8553 /* GKNativeExtensions.h */,
 				8AE9B0F922202F06004A8553 /* Info.plist */,
 				8AE9B10F22202F48004A8553 /* GKNativeExtensions.mm */,
+				8AD6F577223960BB00D011C8 /* GKNativePlayerListener.h */,
+				8AD6F578223960BB00D011C8 /* GKNativePlayerListener.mm */,
+				8AD6F57B223963FE00D011C8 /* CommonTypes.h */,
 			);
 			path = GKNativeExtensions;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A073AD9222943E6005ABD6B /* GKNativeExtensions.mm in Sources */,
+				8AD6F57A223960BB00D011C8 /* GKNativePlayerListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AFA79BC22245A8500084846 /* GKNativeExtensions.mm in Sources */,
+				8AD6F579223960BB00D011C8 /* GKNativePlayerListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

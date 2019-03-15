@@ -3,14 +3,36 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 #import <Foundation/Foundation.h>
-#import "GKNativeExtensions.h"
 #import <GameKit/GameKit.h>
+#import "GKNativeExtensions.h"
+#import "CommonTypes.h"
+#import "GKNativePlayerListener.h"
 
 extern "C" {
-    void _GKDeleteGame(boolCallbackFunc callback, char* saveName){
-        NSString* saveNameStr = [NSString stringWithUTF8String:saveName];
-        NSLog(@"Deleting  = %@", saveNameStr);
-        [GKLocalPlayer.localPlayer deleteSavedGamesWithName:saveNameStr completionHandler:^(NSError * _Nullable error) {
+    void _GKInit(savedGamesCallbackFunc savedGamesCallback){
+        GKNativePlayerListener* npl = [[GKNativePlayerListener alloc] initWithCallback:savedGamesCallback];
+        [GKLocalPlayer.localPlayer registerListener:npl];
+    }
+    
+    void _GKResolveConflictingSaves(SavedGameData * sgData, int sgLength, char* saveArray, int length, boolCallbackFunc callback) {
+        NSMutableArray<GKSavedGame*>* conflictingGames = [NSMutableArray new];
+        
+        for(int i=0; i<length; ++i) {
+            NSDate* date = [[NSDate alloc] initWithTimeIntervalSince1970:sgData[i].modificationDate];
+            NSString* name = [NSString stringWithUTF8String:sgData[i].name];
+            NSString* deviceName = [NSString stringWithUTF8String:sgData[i].deviceName];
+            
+            for(int j=0; j<conflictingGames.count; ++j) {
+                if([conflictingGames[j].modificationDate isEqualToDate:date] && [conflictingGames[j].deviceName isEqualToString:deviceName] &&
+                    [conflictingGames[i].name  isEqualToString:name]) {
+                    
+                    [conflictingGames addObject:conflictingGames[j]];
+                }
+            }
+        }
+        NSData *saveData = [NSData dataWithBytes:saveArray length:length];
+        
+        [GKLocalPlayer.localPlayer resolveConflictingSavedGames:conflictingGames withData:saveData completionHandler:^(NSArray<GKSavedGame *> * _Nullable savedGames, NSError * _Nullable error) {
             if(error != NULL){
                 callback(false);
                 return;
@@ -19,8 +41,9 @@ extern "C" {
         }];
     }
     
-    void _GKFetchSavedGames(saveGamesCallbackFunc callback) {
+    void _GKFetchSavedGames(savedGamesCallbackFunc callback) {
         [GKLocalPlayer.localPlayer fetchSavedGamesWithCompletionHandler:^(NSArray<GKSavedGame *> * _Nullable savedGames, NSError * _Nullable error) {
+            cachedSaves = savedGames;
             
             if(error != NULL){
                 callback(NULL, 0);
@@ -30,33 +53,49 @@ extern "C" {
             SavedGameData * savedGameData = new SavedGameData[savedGames.count];
             
             for(int i=0; i < savedGames.count; ++i) {
-                NSString* deviceNameStr = savedGames[i].deviceName;
-                NSString* nameStr = savedGames[i].name;
-                
-                const char* deviceName = deviceNameStr.UTF8String;
-                const char* name =  nameStr.UTF8String;
-                double modificationDate = savedGames[i].modificationDate.timeIntervalSince1970;
-                
-                savedGameData[i] = SavedGameData {
-                    .deviceName = deviceName,
-                    .name = name,
-                    .modificationDate = modificationDate
-                };
+                savedGameData[i] = SavedGameData (savedGames[i]);
             }
             callback(savedGameData, savedGames.count);
             delete[] savedGameData;
         }];
     }
     
-    void _GKLoadGame(byteArrayPtrCallbackFunc callback, char* saveName) {
-        NSString* name = [NSString stringWithUTF8String:saveName];
+    void _GKDeleteGame(boolCallbackFunc callback, SavedGameData * savedGameData){
+        NSString* saveNameStr = [NSString stringWithUTF8String:savedGameData->name];
+        [GKLocalPlayer.localPlayer deleteSavedGamesWithName:saveNameStr completionHandler:^(NSError * _Nullable error) {
+            if(error != NULL){
+                callback(false);
+                return;
+            }
+            callback(true);
+        }];
+    }
+    
+    void _GKSaveGame(char* saveArray, int length, SavedGameData * savedGameData, boolCallbackFunc callback) {
+        NSData *saveData = [NSData dataWithBytes:saveArray length:length];
+        NSString* saveNameStr = [NSString stringWithUTF8String:savedGameData->name];
+        
+        [GKLocalPlayer.localPlayer saveGameData:saveData withName:saveNameStr completionHandler:^(GKSavedGame * _Nullable savedGame, NSError * _Nullable error) {
+            if(callback != NULL) {
+                if(error != NULL) {
+                    NSLog(@"%@",[error localizedDescription]);
+                    callback(false);
+                } else {
+                    callback(true);
+                }
+            }
+        }];
+    }
+    
+    void _GKLoadGame(byteArrayPtrCallbackFunc callback, SavedGameData * savedGameData) {
+        NSString* name = [NSString stringWithUTF8String:savedGameData->name];
         NSLog(@"Loading  = %@", name);
         
         [GKLocalPlayer.localPlayer fetchSavedGamesWithCompletionHandler:^(NSArray<GKSavedGame *> * _Nullable savedGames, NSError * _Nullable error) {
             
             GKSavedGame * savedGame = NULL;
             for(int i=0; i<savedGames.count; ++i) {
-                if([savedGames[i].name isEqualToString:name]) {
+                if(savedGameData->compareToSavedGame(savedGames[i])) {
                     savedGame = savedGames[i];
                 }
             }
@@ -75,22 +114,6 @@ extern "C" {
                         callback((char*)[data bytes], (int)[data length]);
                     }
                 }];
-            }
-        }];
-    }
-    
-    void _GKSaveGame(char* saveArray, int length, char* saveName, boolCallbackFunc callback) {
-        NSData *saveData = [NSData dataWithBytes:saveArray length:length];
-        NSString* saveNameStr = [NSString stringWithUTF8String:saveName];
-        NSLog(@"Saving  = %@", saveNameStr);
-        [GKLocalPlayer.localPlayer saveGameData:saveData withName:saveNameStr completionHandler:^(GKSavedGame * _Nullable savedGame, NSError * _Nullable error) {
-            if(callback != NULL) {
-                if(error != NULL) {
-                    NSLog(@"%@",[error localizedDescription]);
-                    callback(false);
-                } else {
-                    callback(true);
-                }
             }
         }];
     }
