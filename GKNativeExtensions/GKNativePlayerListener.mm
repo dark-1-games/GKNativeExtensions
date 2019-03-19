@@ -11,11 +11,12 @@
 
 @implementation GKNativePlayerListener
 
-- (id) initWithCallback:(savedGamesCallbackFunc) cb
+- (id) initWithCallbacks:(savedGamesCallbackFunc)conflictCb modifiedCallback:(savedGameCallbackFunc)modifiedCb
 {
     self = [super init];
     if(self) {
-        conflictCallback = cb;
+        conflictCallback = conflictCb;
+        modifiedSaveCallback = modifiedCb;
     }
     return self;
 }
@@ -28,5 +29,10 @@
         savedGameData[i] = SavedGameData(savedGames[i]);
     }
     conflictCallback(savedGameData, savedGames.count);
+}
+
+- (void)player:(GKPlayer *)player didModifySavedGame:(nonnull GKSavedGame *)savedGame {
+    SavedGameData * savedGameData = new SavedGameData(savedGame);
+    modifiedSaveCallback(savedGameData);
 }
 @end

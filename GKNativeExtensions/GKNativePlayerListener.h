@@ -15,10 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GKNativePlayerListener : NSObject <GKLocalPlayerListener>
 {
     savedGamesCallbackFunc conflictCallback;
+    savedGameCallbackFunc modifiedSaveCallback;
 }
 
-- (id) initWithCallback:(savedGamesCallbackFunc) cb;
+- (id) initWithCallbacks:(savedGamesCallbackFunc)conflictCb modifiedCallback:(savedGameCallbackFunc)modifiedCb;
 - (void) player:(GKPlayer *)player hasConflictingSavedGames:(NSArray<GKSavedGame *> *)savedGames;
+- (void) player:(GKPlayer *)player didModifySavedGame:(nonnull GKSavedGame *)savedGame;
+
 @end
 
 NS_ASSUME_NONNULL_END

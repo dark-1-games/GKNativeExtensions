@@ -13,7 +13,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    typedef struct SavedGameData {
+    class SavedGameData {
+    public: 
         const char* _Nullable deviceName;
         const char* _Nullable name;
         double modificationDate;
@@ -33,13 +34,12 @@ extern "C" {
         bool compareToSavedGame(GKSavedGame* _Nullable savedGame) {
             NSString* deviceNameStr = [NSString stringWithUTF8String:this->deviceName];
             NSString* nameStr = [NSString stringWithUTF8String:this->name];
-            NSDate* date = [[NSDate alloc] initWithTimeIntervalSince1970:this->modificationDate];
             
             return [savedGame.deviceName isEqualToString:deviceNameStr] &&
             [savedGame.name isEqualToString:nameStr] &&
-            [savedGame.modificationDate isEqualToDate:date];
+            fabs([savedGame.modificationDate timeIntervalSince1970] - this->modificationDate) < 0.01f;
         }
-    } SavedGameData;
+    };
     
     typedef void (*byteArrayPtrCallbackFunc)(char * _Nullable, int length);
     typedef void (*boolCallbackFunc)(const bool);
