@@ -25,6 +25,8 @@
     conflictingSaves = savedGames;
     SavedGameData * savedGameData = new SavedGameData[savedGames.count];
     
+    NSLog(@"Conflicting saved games");
+    
     for(int i=0; i < savedGames.count; ++i) {
         savedGameData[i] = SavedGameData(savedGames[i]);
     }
@@ -33,6 +35,8 @@
 
 - (void)player:(GKPlayer *)player didModifySavedGame:(nonnull GKSavedGame *)savedGame {
     SavedGameData * savedGameData = new SavedGameData(savedGame);
+    
+    NSLog(@"Modified saved game");
     modifiedSaveCallback(savedGameData);
 }
 @end

@@ -14,7 +14,7 @@ extern "C" {
         [GKLocalPlayer.localPlayer registerListener:npl];
     }
     
-    void _GKResolveConflictingSaves(SavedGameData * sgData, int sgLength, char* saveArray, int length, boolCallbackFunc callback) {
+    void _GKResolveConflictingSaves(SavedGameData * sgData, int sgLength, const char* saveArray, int length, boolCallbackFunc callback) {
         NSMutableArray<GKSavedGame*>* conflictingGames = [NSMutableArray new];
         
         for(int i=0; i<length; ++i) {
@@ -25,7 +25,6 @@ extern "C" {
             for(int j=0; j<conflictingGames.count; ++j) {
                 if([conflictingGames[j].modificationDate isEqualToDate:date] && [conflictingGames[j].deviceName isEqualToString:deviceName] &&
                    [conflictingGames[i].name  isEqualToString:name]) {
-                    
                     [conflictingGames addObject:conflictingGames[j]];
                 }
             }
@@ -55,7 +54,9 @@ extern "C" {
             for(int i=0; i < savedGames.count; ++i) {
                 savedGameData[i] = SavedGameData (savedGames[i]);
             }
-            callback(savedGameData, savedGames.count);
+            
+            int saveCnt = savedGames.count;
+            callback(savedGameData, saveCnt);
             delete[] savedGameData;
         }];
     }
@@ -71,9 +72,11 @@ extern "C" {
         }];
     }
     
-    void _GKSaveGame(char* saveArray, int length, char * saveName, savedGameCallbackFunc callback) {
+    void _GKSaveGame(const char* saveArray, int length, const char* saveName, savedGameCallbackFunc callback) {
         NSData *saveData = [NSData dataWithBytes:saveArray length:length];
         NSString* saveNameStr = [NSString stringWithUTF8String:saveName];
+        
+        NSLog(@"Trying to save under name %@", saveNameStr);
         
         [GKLocalPlayer.localPlayer saveGameData:saveData withName:saveNameStr completionHandler:^(GKSavedGame * _Nullable savedGame, NSError * _Nullable error) {
             if(callback != NULL) {
