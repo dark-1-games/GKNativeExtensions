@@ -47,8 +47,8 @@ extern "C" {
     typedef void (*savedGameCallbackFunc)(SavedGameData * _Nullable game);
     
     
-    NSArray<GKSavedGame *> * _Nullable conflictingSaves;
-    NSArray<GKSavedGame *> * _Nullable cachedSaves;
+    static NSArray<GKSavedGame *> * _Nullable conflictingSaves;
+    static NSArray<GKSavedGame *> * _Nullable cachedSaves;
 #ifdef __cplusplus
 }
 #endif
