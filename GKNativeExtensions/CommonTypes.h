@@ -43,7 +43,7 @@ extern "C" {
     
     typedef void (*byteArrayPtrCallbackFunc)(char * _Nullable, int length);
     typedef void (*boolCallbackFunc)(const bool);
-    typedef void (*savedGamesCallbackFunc)(SavedGameData * _Nullable games, int length);
+    typedef void (*savedGamesCallbackFunc)(SavedGameData * _Nullable games, unsigned long length);
     typedef void (*savedGameCallbackFunc)(SavedGameData * _Nullable game);
     
     
