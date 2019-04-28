@@ -80,7 +80,11 @@ public class GKNativeExtensions
         for (uint i = 0; i < length; i++)
         {
             savedGames[i] = (SavedGameDataGameCenter)Marshal.PtrToStructure(p, typeof(SavedGameDataGameCenter));
+#if NET_4_6
             p += Marshal.SizeOf(typeof(SavedGameDataGameCenter)); // move to next structure
+#else
+            p = new IntPtr( p.ToInt64() + Marshal.SizeOf( typeof( SavedGameDataGameCenter ) ) ); // move to next structure
+#endif
         }
 
         fetchGamesCallback(savedGames);
@@ -97,7 +101,11 @@ public class GKNativeExtensions
         for (uint i = 0; i < length; i++)
         {
             savedGames[i] = (SavedGameDataGameCenter)Marshal.PtrToStructure(p, typeof(SavedGameDataGameCenter));
+#if NET_4_6
             p += Marshal.SizeOf(typeof(SavedGameDataGameCenter)); // move to next structure
+#else
+            p = new IntPtr( p.ToInt64() + Marshal.SizeOf( typeof( SavedGameDataGameCenter ) ) ); // move to next structure
+#endif
         }
 
         conflictCallback(savedGames);
@@ -262,7 +270,11 @@ public class GKNativeExtensions
         isRunningLoadGame = true;
 
         IntPtr savedGamePtr = Marshal.AllocHGlobal(Marshal.SizeOf(savedGame));
+#if NET_4_6
         Marshal.StructureToPtr<SavedGameDataGameCenter>(savedGame, savedGamePtr, false);
+#else
+        Marshal.StructureToPtr( savedGame, savedGamePtr, false );
+#endif
 
 #if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKLoadGame(savedGamePtr, loadCompleteCalled);
