@@ -185,7 +185,7 @@ public class GKNativeExtensions
         }
         GKNativeExtensions.conflictCallback = conflictCallback;
         GKNativeExtensions.modifiedCallback = modifiedCallback;
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKInit(conflictCallbackCalled, modifiedCallbackCalled);
 #endif
         isInited = true;
@@ -200,7 +200,7 @@ public class GKNativeExtensions
         }
         fetchGamesCallback = callback;
         isRunningFetchGames = true;
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKFetchSavedGames(fetchSavesCompleteCalled);
 #endif
     }
@@ -217,7 +217,7 @@ public class GKNativeExtensions
 
         Debug.Log(sgData.Length);
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKResolveConflictingSaves(sgData, sgData.Length, saveArray, saveArray.Length, resolveConflictCallbackCalled);
 #endif
     }
@@ -235,7 +235,7 @@ public class GKNativeExtensions
         isRunningDeleteGame = true;
 
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKDeleteGame(savedGame, deleteCompleteCalled);
 #endif
     }
@@ -253,7 +253,7 @@ public class GKNativeExtensions
 
         Debug.Log("SaveName: " + savedGameName);
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKSaveGame(data, data.Length, savedGameName, saveCompleteCalled);
 #endif
     }
@@ -276,7 +276,7 @@ public class GKNativeExtensions
         Marshal.StructureToPtr( savedGame, savedGamePtr, false );
 #endif
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKLoadGame(savedGamePtr, loadCompleteCalled);
 #endif
     }
