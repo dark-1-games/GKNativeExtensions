@@ -38,7 +38,7 @@ public class GKNativeExtensions
     public static extern void _GKInit(savedGamesCallbackDelegate conflictCallback, savedGameCallbackDelegate modifiedCallback);
 
     [DllImport(Lib)]
-    public static extern void _GKResolveConflictingSaves(SavedGameDataGameCenter[] sgData, int sgLength, byte[] saveArray, int length, boolCallbackDelegate callback);
+    public static extern void _GKResolveConflictingSaves(IntPtr sgData, int sgLength, byte[] saveArray, int length, boolCallbackDelegate callback);
 
     [DllImport(Lib)]
     public static extern void _GKFetchSavedGames(savedGamesCallbackDelegate callback);
@@ -185,7 +185,7 @@ public class GKNativeExtensions
         }
         GKNativeExtensions.conflictCallback = conflictCallback;
         GKNativeExtensions.modifiedCallback = modifiedCallback;
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKInit(conflictCallbackCalled, modifiedCallbackCalled);
 #endif
         isInited = true;
@@ -200,7 +200,7 @@ public class GKNativeExtensions
         }
         fetchGamesCallback = callback;
         isRunningFetchGames = true;
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKFetchSavedGames(fetchSavesCompleteCalled);
 #endif
     }
@@ -217,8 +217,17 @@ public class GKNativeExtensions
 
         Debug.Log(sgData.Length);
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
-        _GKResolveConflictingSaves(sgData, sgData.Length, saveArray, saveArray.Length, resolveConflictCallbackCalled);
+        IntPtr savedGamePtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(SavedGameDataGameCenter)) * sgData.Length);
+        long LongPtr = savedGamePtr.ToInt64(); // Must work both on x86 and x64
+        for (int i = 0; i < sgData.Length; i++)
+        {
+            IntPtr sgDataPtr = new IntPtr(LongPtr);
+            Marshal.StructureToPtr(sgData[i], sgDataPtr, false); // You do not need to erase struct in this case
+            LongPtr += Marshal.SizeOf(typeof(SavedGameDataGameCenter));
+        }
+
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+        _GKResolveConflictingSaves(savedGamePtr, sgData.Length, saveArray, saveArray.Length, resolveConflictCallbackCalled);
 #endif
     }
 
@@ -235,7 +244,7 @@ public class GKNativeExtensions
         isRunningDeleteGame = true;
 
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKDeleteGame(savedGame, deleteCompleteCalled);
 #endif
     }
@@ -253,7 +262,7 @@ public class GKNativeExtensions
 
         Debug.Log("SaveName: " + savedGameName);
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKSaveGame(data, data.Length, savedGameName, saveCompleteCalled);
 #endif
     }
@@ -276,7 +285,7 @@ public class GKNativeExtensions
         Marshal.StructureToPtr( savedGame, savedGamePtr, false );
 #endif
 
-#if CPS_GAME_CENTER && (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+#if (UNITY_IOS || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
         _GKLoadGame(savedGamePtr, loadCompleteCalled);
 #endif
     }
