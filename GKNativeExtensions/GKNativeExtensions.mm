@@ -7,6 +7,7 @@
 #import "GKNativeExtensions.h"
 #import "CommonTypes.h"
 #import "GKNativePlayerListener.h"
+#import "SaveDataCache.h"
 
 extern "C" {
     void _GKInit(savedGamesCallbackFunc conflictCallback, savedGameCallbackFunc modifiedCallback){
@@ -18,8 +19,9 @@ extern "C" {
         NSData *saveData = [NSData dataWithBytes:saveArray length:length];
         //Conflicting games may either be in the cached saved games or cached conflicted games :/
         NSMutableArray<GKSavedGame *> * mergedArrays = [[NSMutableArray alloc] init];
-        if(conflictingSaves != NULL) {
-            [mergedArrays addObjectsFromArray:conflictingSaves];
+        SaveDataCache* sdc = [SaveDataCache sharedManager];
+        if([sdc getConflictingSaves] != NULL) {
+            [mergedArrays addObjectsFromArray:[sdc getConflictingSaves]];
         }
         if(cachedSaves != NULL) {
             [mergedArrays addObjectsFromArray:cachedSaves];

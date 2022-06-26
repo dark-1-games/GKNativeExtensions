@@ -8,6 +8,7 @@
 
 #import "CommonTypes.h"
 #import "GKNativePlayerListener.h"
+#import "SaveDataCache.h"
 
 @implementation GKNativePlayerListener
 
@@ -22,7 +23,8 @@
 }
 
 - (void)player:(GKPlayer *)player hasConflictingSavedGames:(NSArray<GKSavedGame *> *)savedGames {
-    conflictingSaves = savedGames;
+    SaveDataCache* sdc = [SaveDataCache sharedManager];
+    [sdc setConflictingSaves:savedGames];
     SavedGameData * savedGameData = new SavedGameData[savedGames.count];
     
     NSLog(@"Conflicting saved games");
